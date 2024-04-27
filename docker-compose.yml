@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  admin-panel:
+    container_name: admin-panel
+    build:
+      context: .
+      dockerfile: ./apps/admin-panel/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - app_network
+  product:
+    container_name: product
+    build:
+      context: .
+      dockerfile: ./apps/product/Dockerfile
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      - app_network
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    external: true
